@@ -14,7 +14,6 @@ export default function Resources() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-slide every 8 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
