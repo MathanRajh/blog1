@@ -25,9 +25,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setUser(firebaseUser);
       setLoading(false);
 
-      // Redirect if unauthenticated and not on login/signup
-      if (!firebaseUser && pathname !== "/login" && pathname !== "/signup") {
-        router.push("/login");
+      const isAuthPage = pathname === "/login" || pathname === "/signup";
+
+      // ✅ If not logged in → only allow login/signup pages
+      if (!firebaseUser && !isAuthPage) {
+        router.replace("/login");
+      }
+
+      // ✅ If logged in → prevent access to login/signup
+      if (firebaseUser && isAuthPage) {
+        router.replace("/");
       }
     });
 
@@ -41,16 +48,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     await firebaseLogout();
     setUser(null);
-    router.push("/login");
+    router.replace("/login");
   };
 
+  // ✅ Show loading screen while checking auth
   if (loading) {
-    // Simple loading screen to prevent “flash” of the homepage
     return (
       <div className="flex items-center justify-center min-h-screen">
         <p className="text-lg font-semibold animate-pulse">Loading...</p>
       </div>
     );
+  }
+
+  // ✅ If not logged in and trying to access a protected route, show nothing
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+  if (!user && !isAuthPage) {
+    return null; // Blocks rendering Home etc.
   }
 
   return (
