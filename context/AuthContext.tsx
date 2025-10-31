@@ -60,7 +60,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
-  // ✅ If not logged in and trying to access a protected route, show nothing
   const isAuthPage = pathname === "/login" || pathname === "/signup";
   if (!user && !isAuthPage) {
     return null; // Blocks rendering Home etc.

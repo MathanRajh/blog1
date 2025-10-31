@@ -1,29 +1,61 @@
-import { auth, googleProvider, db } from "./firebase";
-import { signInWithPopup, signOut, onAuthStateChanged, User } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  onAuthStateChanged,
+  signOut,
+  User,
+  browserPopupRedirectResolver,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 
-// 🔹 Login with Google
+// 🔹 Google login (Popup + Redirect fallback)
 export async function loginWithGoogle() {
   try {
-    const result = await signInWithPopup(auth, googleProvider);
+    // Try popup first
+    const result = await signInWithPopup(auth, new GoogleAuthProvider(), browserPopupRedirectResolver);
     const user = result.user;
 
-    // Save or update user in Firestore
-    await setDoc(doc(db, "users", user.uid), {
-      name: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      uid: user.uid,
-    }, { merge: true });
+    // Save or update user info in Firestore
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        lastLogin: new Date().toISOString(),
+      },
+      { merge: true }
+    );
 
     return user;
-  } catch (err) {
-    console.error("Google login failed:", err);
-    throw err;
+  } catch (error: any) {
+    // 🔸 Handle popup failures or restricted environments
+    if (
+      error.code === "auth/popup-blocked" ||
+      error.code === "auth/operation-not-supported-in-this-environment"
+    ) {
+      console.warn("Popup blocked or unsupported, using redirect instead...");
+      await signInWithRedirect(auth, new GoogleAuthProvider());
+      return;
+    }
+
+    // 🔸 Handle session issues (especially on iOS)
+    if (error.message?.includes("missing initial state")) {
+      console.warn("Detected missing session state, retrying with redirect...");
+      await signInWithRedirect(auth, new GoogleAuthProvider());
+      return;
+    }
+
+    console.error("Google login failed:", error);
+    throw error;
   }
 }
 
-// 🔹 Logout
+// 🔹 Logout user
 export async function logout() {
   try {
     await signOut(auth);
@@ -34,7 +66,7 @@ export async function logout() {
   }
 }
 
-// 🔹 Listen for auth changes
+// 🔹 Listen for authentication state changes
 export function onAuthChange(callback: (user: User | null) => void) {
   return onAuthStateChanged(auth, callback);
 }
