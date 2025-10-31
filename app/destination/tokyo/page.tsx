@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Hero from "../../../components/dhero";
 
 export default function TokyoPage() {
@@ -28,8 +31,18 @@ export default function TokyoPage() {
     <>
       <Hero title="Tokyo" image="/place_hero/tokyo.jpg" />
 
+      {/* About Section */}
       <section id="about" className="max-w-6xl mx-auto py-16 px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6">About Tokyo</h2>
+        <motion.h2
+          className="text-3xl font-bold mb-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6,ease: "easeOut" }}
+          viewport={{ once: false, amount: 0.4 }}
+        >
+          About Tokyo
+        </motion.h2>
+
         <p className="text-justify text-lg leading-relaxed text-muted-foreground">
           A perfect blend of tradition and innovation, Tokyo captivates
           travelers with its dazzling skyline, cuisine, and rich culture. From
@@ -49,13 +62,23 @@ export default function TokyoPage() {
         </p>
       </section>
 
+      {/* Divider */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-400 to-transparent my-12" />
 
+      {/* Destinations Section */}
       <section
         id="top-destinations"
         className="flex flex-col items-center justify-center p-8 bg-background text-foreground"
       >
-        <h2 className="text-3xl font-bold mb-10 text-center">Most Visited</h2>
+        <motion.h2
+          className="text-3xl font-bold mb-10 text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6,ease: "easeOut" }}
+          viewport={{ once: false, amount: 0.4 }}
+        >
+          Most Visited
+        </motion.h2>
 
         <div className="flex flex-wrap justify-center gap-8">
           {destinations.map((dest) => (

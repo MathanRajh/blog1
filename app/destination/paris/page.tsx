@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Hero from "../../../components/dhero";
 
 export default function ParisPage() {
@@ -28,8 +31,18 @@ export default function ParisPage() {
     <>
       <Hero title="Paris" image="/place_hero/paris.jpg" />
 
+      {/* --- About Section --- */}
       <section id="about" className="max-w-6xl mx-auto py-16 px-4 text-center">
-        <h2 className="text-3xl font-bold mb-6">About Paris</h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: false }}
+          className="text-3xl font-bold mb-6"
+        >
+          About Paris
+        </motion.h2>
+
         <p className="text-justify text-lg leading-relaxed text-muted-foreground">
           Paris, the City of Light, stands as the world’s epicenter of art,
           fashion, and culture. From its elegant boulevards and iconic monuments
@@ -50,11 +63,20 @@ export default function ParisPage() {
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-400 to-transparent my-12" />
 
+      {/* --- Top Destinations Section --- */}
       <section
         id="top-destinations"
         className="flex flex-col items-center justify-center p-8 bg-background text-foreground"
       >
-        <h2 className="text-3xl font-bold mb-10 text-center">Most Visited</h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: false }}
+          className="text-3xl font-bold mb-10 text-center"
+        >
+          Most Visited
+        </motion.h2>
 
         <div className="flex flex-wrap justify-center gap-8">
           {destinations.map((dest) => (
@@ -66,7 +88,7 @@ export default function ParisPage() {
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${dest.img})` }}
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:brightness-125  transition-all duration-300" />
+              <div className="absolute inset-0 bg-black/10 group-hover:brightness-125 transition-all duration-300" />
               <div className="absolute bottom-0 p-6 text-center text-white">
                 <h3 className="text-2xl font-semibold mb-2">{dest.name}</h3>
                 <p className="text-sm opacity-90">{dest.desc}</p>
