@@ -62,7 +62,6 @@ export default function RomePage() {
         </p>
       </section>
 
-      {/* Divider Line */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-400 to-transparent my-12" />
 
       {/* Top Destinations Section */}

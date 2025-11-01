@@ -69,7 +69,6 @@ export default function BaliPage() {
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-400 to-transparent my-12" />
 
-      {/* --- Top Destinations Section --- */}
       <section
         id="top-destinations"
         className="flex flex-col items-center justify-center p-8 bg-background text-foreground"
@@ -90,16 +89,14 @@ export default function BaliPage() {
               key={dest.name}
               className="relative w-72 h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 group"
             >
-              {/* Background Image */}
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{ backgroundImage: `url(${dest.img})` }}
               />
 
-              {/* Overlay */}
+    
               <div className="absolute inset-0 bg-black/10 group-hover:brightness-125 transition-all duration-300" />
 
-              {/* Content */}
               <div className="absolute bottom-0 p-6 text-center text-white">
                 <h3 className="text-2xl font-semibold mb-2">{dest.name}</h3>
                 <p className="text-sm opacity-90">{dest.desc}</p>

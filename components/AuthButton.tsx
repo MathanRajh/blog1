@@ -17,7 +17,7 @@ export default function AuthButton({ type }: { type: "login" | "signup" }) {
         return;
       }
 
-      // Auto-login or signup success
+      // Auto-login 
       router.push("/");
     } catch (error: any) {
       if (error.code === "auth/account-exists-with-different-credential") {

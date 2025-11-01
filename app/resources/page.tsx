@@ -39,7 +39,7 @@ export default function Resources() {
         Top Clicks
       </motion.h1>
 
-      {/* Manual Slider - Keep as is (no scroll animation) */}
+      {/* Manual Slider */}
       <div className="relative w-full max-w-3xl h-96 rounded-2xl overflow-hidden shadow-lg">
         <AnimatePresence custom={direction}>
           <motion.img
@@ -71,7 +71,7 @@ export default function Resources() {
         </button>
       </div>
 
-      {/* Thumbnails with scroll-based animation */}
+      {/* Thumbnails*/}
       <div className="flex gap-4 mt-8 flex-wrap justify-center">
         {images.map((img, idx) => (
           <motion.img

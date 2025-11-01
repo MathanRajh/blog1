@@ -9,7 +9,7 @@ import Footer from "../components/footer";
 
 export default function LayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const hideLayout = pathname === "/login" || pathname === "/signup";
+  const hideLayout = pathname === "/login";
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

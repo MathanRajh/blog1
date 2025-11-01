@@ -24,7 +24,6 @@ export default function Hero({
         />
       </div>
 
-      {/* Subtle dark overlay for contrast */}
       <div className="absolute inset-0 bg-black/30" />
 
       {/* Foreground Content */}

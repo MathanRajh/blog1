@@ -11,14 +11,12 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
-// 🔹 Google login (Popup + Redirect fallback)
 export async function loginWithGoogle() {
   try {
-    // Try popup first
+
     const result = await signInWithPopup(auth, new GoogleAuthProvider(), browserPopupRedirectResolver);
     const user = result.user;
 
-    // Save or update user info in Firestore
     await setDoc(
       doc(db, "users", user.uid),
       {
@@ -33,7 +31,7 @@ export async function loginWithGoogle() {
 
     return user;
   } catch (error: any) {
-    // 🔸 Handle popup failures or restricted environments
+
     if (
       error.code === "auth/popup-blocked" ||
       error.code === "auth/operation-not-supported-in-this-environment"
@@ -43,7 +41,6 @@ export async function loginWithGoogle() {
       return;
     }
 
-    // 🔸 Handle session issues (especially on iOS)
     if (error.message?.includes("missing initial state")) {
       console.warn("Detected missing session state, retrying with redirect...");
       await signInWithRedirect(auth, new GoogleAuthProvider());
@@ -55,7 +52,6 @@ export async function loginWithGoogle() {
   }
 }
 
-// 🔹 Logout user
 export async function logout() {
   try {
     await signOut(auth);
@@ -66,7 +62,6 @@ export async function logout() {
   }
 }
 
-// 🔹 Listen for authentication state changes
 export function onAuthChange(callback: (user: User | null) => void) {
   return onAuthStateChanged(auth, callback);
 }

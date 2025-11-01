@@ -18,7 +18,6 @@ export default function Header() {
   const { user, logout } = useAuth();
   const router = useRouter();
 
-  // ---- Dropdown Hover Logic ----
   const handleMouseEnter = (name: string) => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setOpenDropdown(name);

@@ -27,12 +27,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const isAuthPage = pathname === "/login" || pathname === "/signup";
 
-      // ✅ If not logged in → only allow login/signup pages
       if (!firebaseUser && !isAuthPage) {
         router.replace("/login");
       }
 
-      // ✅ If logged in → prevent access to login/signup
       if (firebaseUser && isAuthPage) {
         router.replace("/");
       }
@@ -51,7 +49,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     router.replace("/login");
   };
 
-  // ✅ Show loading screen while checking auth
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -62,7 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const isAuthPage = pathname === "/login" || pathname === "/signup";
   if (!user && !isAuthPage) {
-    return null; // Blocks rendering Home etc.
+    return null;
   }
 
   return (

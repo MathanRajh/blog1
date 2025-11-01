@@ -30,7 +30,7 @@ export default function AboutPage() {
         that shapes the future of the web.
       </p>
 
-      {/* Animated Social Media Icons (all together) */}
+      {/*Social Media Icons */}
       <motion.div
         className="flex gap-10"
         initial={{ opacity: 0, scale: 0.8, y: 20 }}

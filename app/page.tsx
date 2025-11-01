@@ -14,10 +14,9 @@ export default function BlogPage() {
   const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        router.replace("/login"); // use replace() so user can’t go back
+        router.replace("/login"); 
       } else {
         setCheckingAuth(false);
       }
