@@ -38,7 +38,7 @@ export default function AboutPage() {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <a
-          href="https://instagram.com/yourusername"
+          href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-pink-500 transition-all duration-300 hover:scale-125"
@@ -47,7 +47,7 @@ export default function AboutPage() {
         </a>
 
         <a
-          href="https://twitter.com/yourusername"
+          href="https://twitter.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-sky-400 transition-all duration-300 hover:scale-125"
@@ -56,7 +56,7 @@ export default function AboutPage() {
         </a>
 
         <a
-          href="https://pinterest.com/yourusername"
+          href="https://pinterest.com"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-red-500 transition-all duration-300 hover:scale-125"

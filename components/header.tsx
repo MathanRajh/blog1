@@ -27,7 +27,6 @@ export default function Header() {
     closeTimeoutRef.current = setTimeout(() => setOpenDropdown(null), 200);
   };
 
-  // ---- Profile Dropdown ----
   const handleProfileEnter = () => {
     if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
     setProfileOpen(true);
